@@ -1,0 +1,43 @@
+{
+  "stringTable": {
+    "0": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a",
+    "1": "--target=aarch64-none-linux-android21 --gcc-toolchain=/Users/moon/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/moon/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DconvertImage_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/moon/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a\" clean"
+  ],
+  "buildTargetsCommand": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "convertImage-Debug-arm64-v8a": {
+      "buildCommand": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a\" convertImage",
+      "buildType": "debug",
+      "toolchain": "2431435824",
+      "abi": "arm64-v8a",
+      "artifactName": "convertImage",
+      "files": [
+        {
+          "src": "/Users/moon/Desktop/processing_camera_image/ios/Classes/converter.c",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/arm64-v8a/libconvertImage.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "2431435824": {
+      "cCompilerExecutable": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

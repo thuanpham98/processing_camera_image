@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/moon/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "convertImage-Release-x86_64": {
+      "artifactName": "convertImage",
+      "buildCommand": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/x86_64\" convertImage",
+      "abi": "x86_64",
+      "output": "/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/release/obj/x86_64/libconvertImage.so",
+      "runtimeFiles": []
+    }
+  }
+}

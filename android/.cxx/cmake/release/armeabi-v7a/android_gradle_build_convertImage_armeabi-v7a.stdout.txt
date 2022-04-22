@@ -1,0 +1,2 @@
+ninja: Entering directory `/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/armeabi-v7a'
+ninja: no work to do.
