@@ -42,20 +42,23 @@ class _MyHomePageState extends State<MyHomePage> {
   int count = 0;
   final ProcessingCameraImage _processingCameraImage = ProcessingCameraImage();
   imglib.Image? currentImage;
+  final stopwatch = Stopwatch();
+  void _processinngImage(CameraImage? value) async {
+    if (value != null) {
+      stopwatch.start();
+
+      currentImage = await Future.microtask(() => processImage(value));
+
+      stopwatch.stop();
+      print('this is time process: ${stopwatch.elapsedMilliseconds}');
+      stopwatch.reset();
+      print(currentImage?.length);
+    }
+  }
 
   @override
   void initState() {
-    pipe.listen((value) async {
-      if (value != null) {
-        final stopwatch = Stopwatch();
-        stopwatch.start();
-        currentImage = await Future.microtask(() => processImage(value));
-        stopwatch.stop();
-        print('this is time process: ${stopwatch.elapsedMilliseconds}');
-        stopwatch.reset();
-        print(currentImage?.length);
-      }
-    });
+    pipe.listen(_processinngImage);
     _instanceInit = initCamera();
     super.initState();
   }
@@ -68,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
-    _cameraController = CameraController(cameras[1], ResolutionPreset.medium);
+    _cameraController = CameraController(cameras[1], ResolutionPreset.max);
     await _cameraController.initialize();
     await _cameraController.startImageStream((image) {
       pipe.sink.add(image);
@@ -76,15 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   imglib.Image? processImage(CameraImage _savedImage) {
-    return _processingCameraImage.processCameraImageToRGB(
+    return _processingCameraImage.processCameraImageToGray(
       height: _savedImage.height,
       width: _savedImage.width,
       plane0: _savedImage.planes[0].bytes,
-      plane1: _savedImage.planes[1].bytes,
-      plane2: _savedImage.planes[2].bytes,
-      bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
-      bytesPerPixelPlan1: _savedImage.planes[1].bytesPerPixel,
-      bytesPerRowPlane1: _savedImage.planes[1].bytesPerRow,
       rotationAngle: 180,
     );
   }
