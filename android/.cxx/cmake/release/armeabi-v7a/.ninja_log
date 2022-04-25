@@ -1,7 +1,3 @@
 # ninja log v5
-0	150	1650602418	CMakeFiles/convertImage.dir/Users/moon/Desktop/processing_camera_image/ios/Classes/converter.c.o	65257e3505f7e4de
-150	193	1650602418	/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/release/obj/armeabi-v7a/libconvertImage.so	d8895c299209f524
-1	323	1650620544	CMakeFiles/convertImage.dir/Users/moon/Desktop/processing_camera_image/ios/Classes/converter.c.o	65257e3505f7e4de
-323	394	1650620544	/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/release/obj/armeabi-v7a/libconvertImage.so	d8895c299209f524
-1	231	1650624687	CMakeFiles/convertImage.dir/Users/moon/Desktop/processing_camera_image/ios/Classes/converter.c.o	65257e3505f7e4de
-231	302	1650624687	/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/release/obj/armeabi-v7a/libconvertImage.so	d8895c299209f524
+0	148	1650880212	CMakeFiles/convertImage.dir/Users/moon/Desktop/processing_camera_image/ios/Classes/converter.c.o	65257e3505f7e4de
+148	191	1650880212	/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/release/obj/armeabi-v7a/libconvertImage.so	d8895c299209f524

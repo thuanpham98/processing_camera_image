@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
       stopwatch.stop();
       print('this is time process: ${stopwatch.elapsedMilliseconds}');
       stopwatch.reset();
-      print(currentImage?.length);
+      // print(currentImage?.length);
     }
   }
 
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
-    _cameraController = CameraController(cameras[1], ResolutionPreset.max);
+    _cameraController = CameraController(cameras[1], ResolutionPreset.low);
     await _cameraController.initialize();
     await _cameraController.startImageStream((image) {
       pipe.sink.add(image);
@@ -79,12 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   imglib.Image? processImage(CameraImage _savedImage) {
-    return _processingCameraImage.processCameraImageToGray(
+    return _processingCameraImage.processCameraImageToRGB(
+      bytesPerPixelPlan1: _savedImage.planes[1].bytesPerPixel,
+      bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
+      bytesPerRowPlane1: _savedImage.planes[1].bytesPerRow,
       height: _savedImage.height,
-      width: _savedImage.width,
       plane0: _savedImage.planes[0].bytes,
-      rotationAngle: 180,
+      plane1: _savedImage.planes[1].bytes,
+      plane2: _savedImage.planes[2].bytes,
+      rotationAngle: _cameraController.description.sensorOrientation.toDouble(),
+      width: _savedImage.width,
     );
+    // return _processingCameraImage.processCameraImageToGray(
+    //   height: _savedImage.height,
+    //   width: _savedImage.width,
+    //   plane0: _savedImage.planes[0].bytes,
+    //   rotationAngle: _cameraController.description.sensorOrientation.toDouble(),
+    // );
   }
 
   @override
@@ -119,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: CameraPreview(_cameraController),
               );
             }
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           },
