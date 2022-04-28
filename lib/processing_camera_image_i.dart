@@ -174,4 +174,39 @@ class IProcessingCameraImage implements ProcessingCameraImage {
 
     return imgData;
   }
+
+  /// [processCameraImageToRGBIOS]. for IOS with YUV420.
+  @override
+  imglib.Image? processCameraImageToRGBIOS({
+    int? width,
+    int? height,
+    Uint8List? plane0,
+    double? rotationAngle,
+  }) {
+    if (width == null || height == null || plane0 == null || plane0.isEmpty) {
+      return null;
+    }
+    if (rotationAngle != null) {
+      imglib.copyRotate(
+          imglib.Image.fromBytes(width, height, List<int>.from(plane0)),
+          rotationAngle);
+    }
+    return imglib.Image.fromBytes(width, height, List<int>.from(plane0));
+  }
+
+  /// [processCameraImageToGrayIOS]. for IOS with YUV420.
+  @override
+  imglib.Image? processCameraImageToGrayIOS({
+    int? width,
+    int? height,
+    Uint8List? plane0,
+    double? rotationAngle,
+  }) {
+    return processCameraImageToGray(
+      height: height,
+      width: width,
+      plane0: plane0,
+      rotationAngle: rotationAngle,
+    );
+  }
 }

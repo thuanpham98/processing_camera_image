@@ -6,7 +6,7 @@ import 'package:processing_camera_image/processing_camera_image_i.dart';
 abstract class ProcessingCameraImage {
   factory ProcessingCameraImage() => IProcessingCameraImage();
 
-  /// [ProcessCameraImageToRGB].
+  /// [processCameraImageToRGB]. for Android with YUV420.
   imglib.Image? processCameraImageToRGB({
     int? width,
     int? height,
@@ -19,7 +19,7 @@ abstract class ProcessingCameraImage {
     int? bytesPerPixelPlan1,
   });
 
-  /// [processCameraImageToGray].
+  /// [processCameraImageToGray]. for Android with YUV420.
   imglib.Image? processCameraImageToGray({
     int? width,
     int? height,
@@ -27,7 +27,23 @@ abstract class ProcessingCameraImage {
     double? rotationAngle,
   });
 
-  // /// [processCameraImageToGray8Bit].
+  /// [processCameraImageToRGBIOS]. for IOS with YUV420.
+  imglib.Image? processCameraImageToRGBIOS({
+    int? width,
+    int? height,
+    Uint8List? plane0,
+    double? rotationAngle,
+  });
+
+  /// [processCameraImageToGrayIOS]. for IOS with YUV420.
+  imglib.Image? processCameraImageToGrayIOS({
+    int? width,
+    int? height,
+    Uint8List? plane0,
+    double? rotationAngle,
+  });
+
+  /// [processCameraImageToGray8Bit]. for Android with YUV420.
   Uint8List? processCameraImageToGray8Bit({
     int? width,
     int? height,
