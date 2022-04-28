@@ -1,7 +1,0 @@
-Executable : /Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
-arguments : 
--C
-/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/arm64-v8a
-convertImage
-jvmArgs : 
-

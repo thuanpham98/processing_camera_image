@@ -1,3 +1,0 @@
-/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/armeabi-v7a/CMakeFiles/convertImage.dir

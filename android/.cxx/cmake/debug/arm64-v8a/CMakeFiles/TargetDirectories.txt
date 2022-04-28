@@ -1,3 +1,3 @@
-/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a/CMakeFiles/rebuild_cache.dir
-/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a/CMakeFiles/edit_cache.dir
-/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a/CMakeFiles/convertImage.dir
+/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a/CMakeFiles/edit_cache.dir
+/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a/CMakeFiles/convertImage.dir

@@ -79,23 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   imglib.Image? processImage(CameraImage _savedImage) {
-    return _processingCameraImage.processCameraImageToRGB(
-      bytesPerPixelPlan1: _savedImage.planes[1].bytesPerPixel,
-      bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
-      bytesPerRowPlane1: _savedImage.planes[1].bytesPerRow,
-      height: _savedImage.height,
-      plane0: _savedImage.planes[0].bytes,
-      plane1: _savedImage.planes[1].bytes,
-      plane2: _savedImage.planes[2].bytes,
-      rotationAngle: _cameraController.description.sensorOrientation.toDouble(),
-      width: _savedImage.width,
-    );
-    // return _processingCameraImage.processCameraImageToGray(
+    // return _processingCameraImage.processCameraImageToRGB(
+    //   bytesPerPixelPlan1: _savedImage.planes[1].bytesPerPixel,
+    //   bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
+    //   bytesPerRowPlane1: _savedImage.planes[1].bytesPerRow,
     //   height: _savedImage.height,
-    //   width: _savedImage.width,
     //   plane0: _savedImage.planes[0].bytes,
+    //   plane1: _savedImage.planes[1].bytes,
+    //   plane2: _savedImage.planes[2].bytes,
     //   rotationAngle: _cameraController.description.sensorOrientation.toDouble(),
+    //   width: _savedImage.width,
     // );
+    return _processingCameraImage.processCameraImageToGray(
+      height: _savedImage.height,
+      width: _savedImage.width,
+      plane0: _savedImage.planes[0].bytes,
+      rotationAngle: _cameraController.description.sensorOrientation.toDouble(),
+    );
   }
 
   @override

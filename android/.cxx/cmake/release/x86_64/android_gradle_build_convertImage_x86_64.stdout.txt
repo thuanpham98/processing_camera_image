@@ -1,2 +1,0 @@
-ninja: Entering directory `/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/release/x86_64'
-ninja: no work to do.

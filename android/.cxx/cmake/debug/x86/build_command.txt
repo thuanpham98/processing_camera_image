@@ -1,20 +1,20 @@
-                Executable : /Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake
+                Executable : /home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/cmake
 arguments : 
--H/Users/moon/Desktop/processing_camera_image/android
--DCMAKE_FIND_ROOT_PATH=/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab/x86/prefab
+-H/home/thuannek69/Desktop/processing_camera_image/android
+-DCMAKE_FIND_ROOT_PATH=/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab/x86/prefab
 -DCMAKE_BUILD_TYPE=Debug
--DCMAKE_TOOLCHAIN_FILE=/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake
+-DCMAKE_TOOLCHAIN_FILE=/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake
 -DANDROID_ABI=x86
--DANDROID_NDK=/Users/moon/Library/Android/sdk/ndk/21.1.6352462
+-DANDROID_NDK=/home/thuannek69/Android/Sdk/ndk/21.1.6352462
 -DANDROID_PLATFORM=android-21
 -DCMAKE_ANDROID_ARCH_ABI=x86
--DCMAKE_ANDROID_NDK=/Users/moon/Library/Android/sdk/ndk/21.1.6352462
+-DCMAKE_ANDROID_NDK=/home/thuannek69/Android/Sdk/ndk/21.1.6352462
 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86
--DCMAKE_MAKE_PROGRAM=/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86
+-DCMAKE_MAKE_PROGRAM=/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
 -DCMAKE_SYSTEM_NAME=Android
 -DCMAKE_SYSTEM_VERSION=21
--B/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86
+-B/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86
 -GNinja
 jvmArgs : 
 
