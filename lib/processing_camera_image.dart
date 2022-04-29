@@ -17,6 +17,9 @@ abstract class ProcessingCameraImage {
     int? bytesPerRowPlane0,
     int? bytesPerRowPlane1,
     int? bytesPerPixelPlan1,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   });
 
   /// [processCameraImageToGray]. for Android with YUV420.
@@ -25,22 +28,35 @@ abstract class ProcessingCameraImage {
     int? height,
     Uint8List? plane0,
     double? rotationAngle,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   });
 
-  /// [processCameraImageToRGBIOS]. for IOS with YUV420.
+  /// [processCameraImageToRGBIOS]. for IOS with NV12.
   imglib.Image? processCameraImageToRGBIOS({
     int? width,
     int? height,
     Uint8List? plane0,
+    Uint8List? plane1,
     double? rotationAngle,
+    int? bytesPerRowPlane0,
+    int? bytesPerRowPlane1,
+    int? bytesPerPixelPlan1,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   });
 
-  /// [processCameraImageToGrayIOS]. for IOS with YUV420.
+  /// [processCameraImageToGrayIOS]. for IOS with NV12.
   imglib.Image? processCameraImageToGrayIOS({
     int? width,
     int? height,
     Uint8List? plane0,
     double? rotationAngle,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   });
 
   /// [processCameraImageToGray8Bit]. for Android with YUV420.
@@ -49,5 +65,8 @@ abstract class ProcessingCameraImage {
     int? height,
     Uint8List? plane0,
     double? rotationAngle,
+    int backGroundColor = 0xFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   });
 }

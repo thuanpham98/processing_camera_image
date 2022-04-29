@@ -11,9 +11,11 @@ import 'processing_camera_image.dart';
 
 class IProcessingCameraImage implements ProcessingCameraImage {
   static IProcessingCameraImage? _instance;
-  late final ConvertImageRGBFlutter _convertImageRGB;
-  late final ConvertImageGrayFlutter _convertImageGrayFlutter;
-  late final ConvertImageGray8BitFlutter _convertImageGray8BitFlutter;
+  late final ConvertImageYuv420pToRGBFlutter _convertImageYuv420pToRGB;
+  late final ConvertImageYuv420pToGrayFlutter _convertImageYuv420pToGray;
+  late final ConvertImageYuv420pToGray8BitFlutter
+      _convertImageYuv420pToGray8Bit;
+  late final ConvertImageNV12ToRGBFlutter _convertImageNV12ToRGB;
 
   factory IProcessingCameraImage() {
     _instance ??= IProcessingCameraImage._();
@@ -24,18 +26,24 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     final DynamicLibrary convertImageLib = Platform.isAndroid
         ? DynamicLibrary.open("libconvertImage.so")
         : DynamicLibrary.process();
-    _convertImageRGB = convertImageLib
-        .lookup<NativeFunction<ConvertImageRGBC>>('convert_image_rgb')
-        .asFunction<ConvertImageRGBFlutter>();
+    _convertImageYuv420pToRGB = convertImageLib
+        .lookup<NativeFunction<ConvertImageYuv420pToRGBC>>(
+            'convert_image_yuv420p_to_rgb')
+        .asFunction<ConvertImageYuv420pToRGBFlutter>();
 
-    _convertImageGrayFlutter = convertImageLib
-        .lookup<NativeFunction<ConvertImageGrayC>>('convert_image_gray_scale')
-        .asFunction<ConvertImageGrayFlutter>();
+    _convertImageYuv420pToGray = convertImageLib
+        .lookup<NativeFunction<ConvertImageYuv420pToGrayC>>(
+            'convert_image_yuv420p_to_gray')
+        .asFunction<ConvertImageYuv420pToGrayFlutter>();
 
-    _convertImageGray8BitFlutter = convertImageLib
-        .lookup<NativeFunction<ConvertImageGray8BitC>>(
-            'convert_image_gray_scale_8bit')
-        .asFunction<ConvertImageGray8BitFlutter>();
+    _convertImageYuv420pToGray8Bit = convertImageLib
+        .lookup<NativeFunction<ConvertImageYuv420pToGray8BitC>>(
+            'convert_image_yuv420p_to_gray_8bit')
+        .asFunction<ConvertImageYuv420pToGray8BitFlutter>();
+    _convertImageNV12ToRGB = convertImageLib
+        .lookup<NativeFunction<ConvertImageNV12ToRGBC>>(
+            'convert_image_nv12_to_rgb')
+        .asFunction<ConvertImageNV12ToRGBFlutter>();
   }
 
   /// [ProcessCameraImageToRGB].
@@ -50,12 +58,18 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int? bytesPerRowPlane0,
     int? bytesPerRowPlane1,
     int? bytesPerPixelPlan1,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   }) {
     if (width == null ||
         height == null ||
-        plane0?.isEmpty == null ||
-        plane1?.isEmpty == null ||
-        plane2?.isEmpty == null ||
+        plane0 == null ||
+        plane1 == null ||
+        plane2 == null ||
+        plane0.isEmpty ||
+        plane1.isEmpty ||
+        plane2.isEmpty ||
         bytesPerRowPlane0 == null ||
         bytesPerRowPlane1 == null ||
         bytesPerPixelPlan1 == null) {
@@ -70,21 +84,32 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int newImgHeight = (sinVal * bytesPerRowPlane0 + cosVal * height).toInt();
 
     // Allocate memory for the 3 planes of the image
-    Pointer<Uint8> p = ffi.malloc.allocate(plane0?.length ?? 0);
-    Pointer<Uint8> p1 = ffi.malloc.allocate(plane1?.length ?? 0);
-    Pointer<Uint8> p2 = ffi.malloc.allocate(plane2?.length ?? 0);
+    Pointer<Uint8> p = ffi.malloc.allocate(plane0.length);
+    Pointer<Uint8> p1 = ffi.malloc.allocate(plane1.length);
+    Pointer<Uint8> p2 = ffi.malloc.allocate(plane2.length);
 
     // Assign the planes data to the pointers of the image
-    Uint8List pointerList = p.asTypedList(plane0?.length ?? 0);
-    Uint8List pointerList1 = p1.asTypedList(plane1?.length ?? 0);
-    Uint8List pointerList2 = p2.asTypedList(plane2?.length ?? 0);
-    pointerList.setRange(0, plane0?.length ?? 0, plane0 ?? Uint8List(0));
-    pointerList1.setRange(0, plane1?.length ?? 0, plane1 ?? Uint8List(0));
-    pointerList2.setRange(0, plane2?.length ?? 0, plane2 ?? Uint8List(0));
+    Uint8List pointerList = p.asTypedList(plane0.length);
+    Uint8List pointerList1 = p1.asTypedList(plane1.length);
+    Uint8List pointerList2 = p2.asTypedList(plane2.length);
+    pointerList.setRange(0, plane0.length, plane0);
+    pointerList1.setRange(0, plane1.length, plane1);
+    pointerList2.setRange(0, plane2.length, plane2);
 
     // Call the convertImage function and convert the YUV to RGB
-    Pointer<Uint32> imgP = _convertImageRGB(p, p1, p2, bytesPerRowPlane1,
-        bytesPerPixelPlan1, bytesPerRowPlane0, height, rotationAngle);
+    Pointer<Uint32> imgP = _convertImageYuv420pToRGB(
+      p,
+      p1,
+      p2,
+      bytesPerRowPlane1,
+      bytesPerPixelPlan1,
+      bytesPerRowPlane0,
+      height,
+      rotationAngle,
+      backGroundColor,
+      isFlipVectical,
+      isFlipHoriozntal,
+    );
 
     // Get the pointer of the data returned from the function to a List
     List<int> imgData = imgP.asTypedList(((newImgWidth) * (newImgHeight)));
@@ -109,6 +134,9 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int? height,
     Uint8List? plane0,
     double? rotationAngle,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   }) {
     if (width == null || height == null || plane0?.isEmpty == null) {
       return null;
@@ -126,8 +154,15 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     Uint8List pointerList = p.asTypedList(plane0?.length ?? 0);
     pointerList.setRange(0, plane0?.length ?? 0, plane0 ?? Uint8List(0));
 
-    Pointer<Uint32> imgP =
-        _convertImageGrayFlutter(p, width, height, rotationAngle);
+    Pointer<Uint32> imgP = _convertImageYuv420pToGray(
+      p,
+      width,
+      height,
+      rotationAngle,
+      backGroundColor,
+      isFlipVectical,
+      isFlipHoriozntal,
+    );
 
     List<int> imgData = imgP.asTypedList(newImgWidth * newImgHeight);
     imglib.Image img =
@@ -146,6 +181,9 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int? height,
     Uint8List? plane0,
     double? rotationAngle,
+    int backGroundColor = 0xFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   }) {
     if (width == null || height == null || plane0?.isEmpty == null) {
       return null;
@@ -164,8 +202,15 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     Uint8List pointerList = p.asTypedList(plane0?.length ?? 0);
     pointerList.setRange(0, plane0?.length ?? 0, plane0 ?? Uint8List(0));
 
-    Pointer<Uint8> imgP =
-        _convertImageGray8BitFlutter(p, width, height, rotationAngle);
+    Pointer<Uint8> imgP = _convertImageYuv420pToGray8Bit(
+      p,
+      width,
+      height,
+      rotationAngle,
+      backGroundColor,
+      isFlipVectical,
+      isFlipHoriozntal,
+    );
 
     Uint8List imgData = imgP.asTypedList(newImgHeight * newImgWidth);
 
@@ -181,17 +226,72 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int? width,
     int? height,
     Uint8List? plane0,
+    Uint8List? plane1,
     double? rotationAngle,
+    int? bytesPerRowPlane0,
+    int? bytesPerRowPlane1,
+    int? bytesPerPixelPlan1,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   }) {
-    if (width == null || height == null || plane0 == null || plane0.isEmpty) {
+    if (width == null ||
+        height == null ||
+        plane0 == null ||
+        plane1 == null ||
+        plane0.isEmpty ||
+        plane1.isEmpty ||
+        bytesPerRowPlane0 == null ||
+        bytesPerRowPlane1 == null ||
+        bytesPerPixelPlan1 == null) {
       return null;
     }
-    if (rotationAngle != null) {
-      imglib.copyRotate(
-          imglib.Image.fromBytes(width, height, List<int>.from(plane0)),
-          rotationAngle);
-    }
-    return imglib.Image.fromBytes(width, height, List<int>.from(plane0));
+    rotationAngle ??= 0;
+    double rad =
+        (rotationAngle * 3.14159265358979323846264338327950288 / 180.0);
+    double sinVal = sin(rad).abs();
+    double cosVal = cos(rad).abs();
+    int newImgWidth = (sinVal * height + cosVal * bytesPerRowPlane0).toInt();
+    int newImgHeight = (sinVal * bytesPerRowPlane0 + cosVal * height).toInt();
+
+    // Allocate memory for the 3 planes of the image
+    Pointer<Uint8> p = ffi.malloc.allocate(plane0.length);
+    Pointer<Uint8> p1 = ffi.malloc.allocate(plane1.length);
+
+    // Assign the planes data to the pointers of the image
+    Uint8List pointerList = p.asTypedList(plane0.length);
+    Uint8List pointerList1 = p1.asTypedList(plane1.length);
+    pointerList.setRange(0, plane0.length, plane0);
+    pointerList1.setRange(0, plane1.length, plane1);
+
+    // Call the convertImage function and convert the YUV to RGB
+    Pointer<Uint32> imgP = _convertImageNV12ToRGB(
+      p,
+      p1,
+      bytesPerRowPlane1,
+      bytesPerPixelPlan1,
+      bytesPerRowPlane0,
+      height,
+      rotationAngle,
+      backGroundColor,
+      isFlipVectical,
+      isFlipHoriozntal,
+    );
+
+    // Get the pointer of the data returned from the function to a List
+    final imgData = imgP.asTypedList(((newImgWidth) * (newImgHeight)));
+
+    // // Generate image from the converted data
+    imglib.Image img =
+        imglib.Image.fromBytes(newImgWidth, newImgHeight, imgData);
+
+    // Free the memory space allocated
+    // from the planes and the converted data
+    ffi.malloc.free(p);
+    ffi.malloc.free(p1);
+    ffi.malloc.free(imgP);
+
+    return img;
   }
 
   /// [processCameraImageToGrayIOS]. for IOS with YUV420.
@@ -201,12 +301,18 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int? height,
     Uint8List? plane0,
     double? rotationAngle,
+    int backGroundColor = 0xFFFFFFFF,
+    bool isFlipHoriozntal = false,
+    bool isFlipVectical = false,
   }) {
     return processCameraImageToGray(
       height: height,
       width: width,
       plane0: plane0,
       rotationAngle: rotationAngle,
+      backGroundColor: backGroundColor,
+      isFlipHoriozntal: isFlipHoriozntal,
+      isFlipVectical: isFlipVectical,
     );
   }
 }
