@@ -1,3 +1,6 @@
+## 0.0.4
+
+- Fix native code for IOS , optimize processing
 ## 0.0.3
 
 - Fix native code, avoiding overload memory

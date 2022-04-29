@@ -1,15 +1,10 @@
 # processing_camera_image
 
-A new Flutter project.
+A Flutter plugin for Android and IOS for processing camera image with format YUV from camera plugin of google.
 
-## Getting Started
+## Getting started
+- This pluin only process image camera with type YUV, please set format type of camera image if you use camera plugin of google.
+- I support export channel 8bit gray per pixel for processing face detecting .
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+## IOS
+- Only use funtion with tag IOS ( except `processCameraImageToGray8Bit`).
