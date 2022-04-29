@@ -39,20 +39,12 @@ class _MyHomePageState extends State<MyHomePage> {
   late final CameraController _cameraController;
   late Future<void> _instanceInit;
   final pipe = BehaviorSubject<CameraImage?>.seeded(null);
-  int count = 0;
   final ProcessingCameraImage _processingCameraImage = ProcessingCameraImage();
   imglib.Image? currentImage;
-  final stopwatch = Stopwatch();
+
   void _processinngImage(CameraImage? value) async {
     if (value != null) {
-      stopwatch.start();
-
       currentImage = await Future.microtask(() => processImage(value));
-
-      stopwatch.stop();
-      print('this is time process: ${stopwatch.elapsedMilliseconds}');
-      stopwatch.reset();
-      // print(currentImage?.length);
     }
   }
 
@@ -71,7 +63,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
-    _cameraController = CameraController(cameras[1], ResolutionPreset.low);
+    _cameraController = CameraController(cameras[0], ResolutionPreset.medium,
+        imageFormatGroup: ImageFormatGroup.yuv420);
     await _cameraController.initialize();
     await _cameraController.startImageStream((image) {
       pipe.sink.add(image);
@@ -79,22 +72,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   imglib.Image? processImage(CameraImage _savedImage) {
-    // return _processingCameraImage.processCameraImageToRGB(
-    //   bytesPerPixelPlan1: _savedImage.planes[1].bytesPerPixel,
+    // return _processingCameraImage.processCameraImageToRGBIOS(
+    //   bytesPerPixelPlan1: 2,
     //   bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
-    //   bytesPerRowPlane1: _savedImage.planes[1].bytesPerRow,
+    //   bytesPerRowPlane1: _savedImage.planes[0].bytesPerRow,
     //   height: _savedImage.height,
     //   plane0: _savedImage.planes[0].bytes,
     //   plane1: _savedImage.planes[1].bytes,
-    //   plane2: _savedImage.planes[2].bytes,
-    //   rotationAngle: _cameraController.description.sensorOrientation.toDouble(),
+    //   rotationAngle: 0,
     //   width: _savedImage.width,
     // );
-    return _processingCameraImage.processCameraImageToGray(
+    return _processingCameraImage.processCameraImageToGrayIOS(
       height: _savedImage.height,
       width: _savedImage.width,
       plane0: _savedImage.planes[0].bytes,
-      rotationAngle: _cameraController.description.sensorOrientation.toDouble(),
+      rotationAngle: 15,
+      backGroundColor: Colors.red.value,
+      isFlipVectical: true,
     );
   }
 
@@ -103,9 +97,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       floatingActionButton: InkWell(
         child: Container(
-          height: 100,
-          width: 100,
-          color: Colors.red,
+          color: Colors.white.withOpacity(0.0),
+          height: 36,
+          width: 36,
+          child: const Icon(Icons.photo_camera),
         ),
         onTap: () {
           Navigator.push(
