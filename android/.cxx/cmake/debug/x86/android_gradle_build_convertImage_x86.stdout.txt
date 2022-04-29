@@ -1,3 +1,0 @@
-ninja: Entering directory `/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86'
-[1/2] Building C object CMakeFiles/convertImage.dir/home/thuannek69/Desktop/processing_camera_image/ios/native/converter.c.o
-[2/2] Linking C shared library /home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86/libconvertImage.so

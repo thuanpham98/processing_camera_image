@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86",
-  "command": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=i686-none-linux-android21 --gcc-toolchain=/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DconvertImage_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/convertImage.dir/home/thuannek69/Desktop/processing_camera_image/ios/native/converter.c.o   -c /home/thuannek69/Desktop/processing_camera_image/ios/native/converter.c",
-  "file": "/home/thuannek69/Desktop/processing_camera_image/ios/native/converter.c"
-}
-]

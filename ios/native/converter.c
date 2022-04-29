@@ -7,7 +7,9 @@
 #include <math.h>
 #include <stdlib.h>
 
-int clamp(int lower, int higher, int val)
+#define HEXFF 255
+
+int _clamp(int lower, int higher, int val)
 {
     if (val < lower)
         return 0;
@@ -17,28 +19,144 @@ int clamp(int lower, int higher, int val)
         return val;
 }
 
-int getRotatedImageByteIndex(int x, int y, int rotatedImageWidth)
+uint32_t *_rotaion_image_32bit(uint32_t *src, double angle, int width, int height, uint32_t background_color)
 {
-    return rotatedImageWidth * (y) + (x);
+    double rad = (angle * M_PI / 180.0);
+    double sinVal = sin(rad);
+    double cosVal = cos(rad);
+    int new_width = (int)(fabs(sinVal * height) + fabs(cosVal * width));
+    int new_height = (int)(fabs(sinVal * width) + fabs(cosVal * height));
+    double w2 = 0.5 * width;
+    double h2 = 0.5 * height;
+    double dw2 = 0.5 * new_width;
+    double dh2 = 0.5 * new_height;
+
+    uint32_t *dest = malloc(sizeof(uint32_t) * (new_width * new_height));
+
+    for (int i = 0; i < new_height; ++i)
+    {
+        for (int j = 0; j < new_width; ++j)
+        {
+            int oriX = (int)(w2 + (j - dw2) * cosVal + (i - dh2) * sinVal);
+            int oriY = (int)(h2 - (j - dw2) * sinVal + (i - dh2) * cosVal);
+            if (oriX >= 0 && oriX < width && oriY >= 0 && oriY < height)
+            {
+                dest[i * new_width + j] = src[oriX + oriY * width];
+            }
+            else
+            {
+                dest[i * new_width + j] = background_color;
+            }
+        }
+    }
+    free(src);
+    return dest;
 }
 
-uint32_t *convert_image_gray_scale(uint8_t *plane0, int width, int height, double angleRotation)
+uint8_t *_rotaion_image_8bit(uint8_t *src, double angle, int width, int height, uint8_t background_color)
+{
+    double rad = (angle * M_PI / 180.0);
+    double sinVal = sin(rad);
+    double cosVal = cos(rad);
+    int new_width = (int)(fabs(sinVal * height) + fabs(cosVal * width));
+    int new_height = (int)(fabs(sinVal * width) + fabs(cosVal * height));
+    double w2 = 0.5 * width;
+    double h2 = 0.5 * height;
+    double dw2 = 0.5 * new_width;
+    double dh2 = 0.5 * new_height;
+
+    uint8_t *dest = malloc(sizeof(uint8_t) * (new_width * new_height));
+
+    for (int i = 0; i < new_height; ++i)
+    {
+        for (int j = 0; j < new_width; ++j)
+        {
+            int oriX = (int)(w2 + (j - dw2) * cosVal + (i - dh2) * sinVal);
+            int oriY = (int)(h2 - (j - dw2) * sinVal + (i - dh2) * cosVal);
+            if (oriX >= 0 && oriX < width && oriY >= 0 && oriY < height)
+            {
+                dest[i * new_width + j] = src[oriX + oriY * width];
+            }
+            else
+            {
+                dest[i * new_width + j] = background_color;
+            }
+        }
+    }
+    free(src);
+    return dest;
+}
+
+void _flip_horizontal_32bit(int width, int height, uint32_t *src)
+{
+    int dw2 = (int)(width / 2);
+    for (int y = 0; y < height; ++y)
+    {
+        int y1 = (y * width);
+        for (int x = 0; x < dw2; ++x)
+        {
+            int x2 = (width - 1 - x);
+            uint32_t t = src[y1 + x2];
+            src[y1 + x2] = src[y1 + x];
+            src[y1 + x] = t;
+        }
+    }
+}
+
+void _flip_horizontal_8bit(int width, int height, uint8_t *src)
+{
+    int dw2 = (int)(width / 2);
+    for (int y = 0; y < height; ++y)
+    {
+        int y1 = (y * width);
+        for (int x = 0; x < dw2; ++x)
+        {
+            int x2 = (width - 1 - x);
+            uint8_t t = src[y1 + x2];
+            src[y1 + x2] = src[y1 + x];
+            src[y1 + x] = t;
+        }
+    }
+}
+
+void _flip_vertical_32bit(int width, int height, uint32_t *src)
+{
+    int h2 = (int)(height / 2);
+    for (int y = 0; y < h2; ++y)
+    {
+        int y1 = (y * width);
+        int y2 = (height - 1 - y) * width;
+        for (int x = 0; x < width; ++x)
+        {
+            uint32_t t = src[y2 + x];
+            src[y2 + x] = src[y1 + x];
+            src[y1 + x] = t;
+        }
+    }
+}
+
+void _flip_vertical_8bit(int width, int height, uint8_t *src)
+{
+    int h2 = (int)(height / 2);
+    for (int y = 0; y < h2; ++y)
+    {
+        int y1 = (y * width);
+        int y2 = (height - 1 - y) * width;
+        for (int x = 0; x < width; ++x)
+        {
+            uint8_t t = src[y2 + x];
+            src[y2 + x] = src[y1 + x];
+            src[y1 + x] = t;
+        }
+    }
+}
+
+uint32_t *convert_image_yuv420p_to_gray(uint8_t *plane0, int width, int height, double angleRotation, uint32_t background_color, bool flip_vertical, bool flip_horizontal)
 {
     int x, y;
     int yp, index;
-    int hexFF = 255;
-    double rad = (angleRotation * M_PI / 180.0);
-    double sinVal = sin(rad);
-    double cosVal = cos(rad);
-    int newImgWidth = (int)(fabs(sinVal * height) + fabs(cosVal * width));
-    int newImgHeight = (int)(fabs(sinVal * width) + fabs(cosVal * height));
-    double w2 = 0.5 * width;
-    double h2 = 0.5 * height;
-    double dw2 = 0.5 * newImgWidth;
-    double dh2 = 0.5 * newImgHeight;
 
-    uint32_t *table = malloc(sizeof(uint32_t) * (width * height));
-    uint32_t *imageRot = malloc(sizeof(uint32_t) * (newImgWidth * newImgHeight));
+    uint32_t *src = malloc(sizeof(uint32_t) * (width * height));
 
     for (x = 0; x < width; x++)
     {
@@ -46,60 +164,36 @@ uint32_t *convert_image_gray_scale(uint8_t *plane0, int width, int height, doubl
         {
             index = y * width + x;
             yp = plane0[index];
-            table[x + y * width] = (hexFF << 24) | (yp << 16) | (yp << 8) | yp;
+            src[x + y * width] = (HEXFF << 24) | (yp << 16) | (yp << 8) | yp;
         }
+    }
+    if (flip_horizontal)
+    {
+        _flip_horizontal_32bit(width, height, src);
+    }
+    if (flip_vertical)
+    {
+        _flip_vertical_32bit(width, height, src);
     }
 
-    for (int i = 0; i < newImgHeight; i++)
+    if (angleRotation == 0)
     {
-        for (int j = 0; j < newImgWidth; j++)
-        {
-            double oriX = (w2 + (j - dw2) * cosVal + (i - dh2) * sinVal);
-            double oriY = (h2 - (j - dw2) * sinVal + (i - dh2) * cosVal);
-            if (oriX >= 0 && oriX < width && oriY >= 0 && oriY < height)
-            {
-                imageRot[i * newImgWidth + j] =
-                    table[(int)(oriX) + (int)(oriY)*newImgHeight];
-            }
-            else
-            {
-                imageRot[i * newImgWidth + j] = 0;
-            }
-        }
-    }
-    free(table);
-    for (int i = 0; i < newImgHeight; i++)
-    {
-        int i1 = (int)(i * newImgWidth);
-        for (int j = 0; j < (int)(dw2); j++)
-        {
-            int j2 = (newImgWidth - 1 - j);
-            uint32_t t = imageRot[i1 + j2];
-            imageRot[i1 + j2] = imageRot[i1 + j];
-            imageRot[i1 + j] = t;
-        }
+        return src;
     }
 
-    return imageRot;
+    else
+    {
+        return _rotaion_image_32bit(src, angleRotation, width, height, background_color);
+    }
 }
 
-uint8_t *convert_image_gray_scale_8bit(uint8_t *plane0, int width, int height, double angleRotation)
+uint8_t *convert_image_yuv420p_to_gray_8bit(uint8_t *plane0, int width, int height, double angleRotation, uint8_t background_color, bool flip_vertical, bool flip_horizontal)
 {
     int x, y;
-    int yp, index;
-    int hexFF = 255;
-    double rad = (angleRotation * M_PI / 180.0);
-    double sinVal = sin(rad);
-    double cosVal = cos(rad);
-    int newImgWidth = (int)(fabs(sinVal * height) + fabs(cosVal * width));
-    int newImgHeight = (int)(fabs(sinVal * width) + fabs(cosVal * height));
-    double w2 = 0.5 * width;
-    double h2 = 0.5 * height;
-    double dw2 = 0.5 * newImgWidth;
-    double dh2 = 0.5 * newImgHeight;
+    int index;
+    uint8_t yp;
 
-    uint32_t *table = malloc(sizeof(uint32_t) * (width * height));
-    uint8_t *imageRot = malloc(sizeof(uint8_t) * (newImgWidth * newImgHeight));
+    uint8_t *src = malloc(sizeof(uint8_t) * (width * height));
 
     for (x = 0; x < width; x++)
     {
@@ -107,62 +201,37 @@ uint8_t *convert_image_gray_scale_8bit(uint8_t *plane0, int width, int height, d
         {
             index = y * width + x;
             yp = plane0[index];
-            table[x + y * width] = yp;
+            src[x + y * width] = yp;
         }
     }
 
-    for (int i = 0; i < newImgHeight; ++i)
+    if (flip_horizontal)
     {
-        for (int j = 0; j < newImgWidth; ++j)
-        {
-            double oriX = (w2 + (j - dw2) * cosVal + (i - dh2) * sinVal);
-            double oriY = (h2 - (j - dw2) * sinVal + (i - dh2) * cosVal);
-            if (oriX >= 0 && oriX < width && oriY >= 0 && oriY < height)
-            {
-                imageRot[i * newImgWidth + j] = table[(int)(oriX) + (int)(oriY)*newImgHeight];
-            }
-            else
-            {
-                imageRot[i * newImgWidth + j] = 0;
-            }
-        }
+        _flip_horizontal_8bit(width, height, src);
     }
-    free(table);
-    for (int i = 0; i < newImgHeight; ++i)
+    if (flip_vertical)
     {
-        int i1 = (int)(i * newImgWidth);
-        for (int j = 0; j < (int)(dw2); ++j)
-        {
-            int j2 = (newImgWidth - 1 - j);
-            uint8_t t = imageRot[i1 + j2];
-            imageRot[i1 + j2] = imageRot[i1 + j];
-            imageRot[i1 + j] = t;
-        }
+        _flip_vertical_8bit(width, height, src);
     }
 
-    return imageRot;
+    if (angleRotation == 0)
+    {
+        return src;
+    }
+    else
+    {
+        return _rotaion_image_8bit(src, angleRotation, width, height, background_color);
+    }
 }
 
-uint32_t *convert_image_rgb(uint8_t *plane0, uint8_t *plane1, uint8_t *plane2, int bytesPerRow, int bytesPerPixel, int width, int height, double angleRotation)
+uint32_t *convert_image_yuv420p_to_rgb(uint8_t *plane0, uint8_t *plane1, uint8_t *plane2, int bytesPerRow, int bytesPerPixel, int width, int height, double angleRotation, uint32_t background_color, bool flip_vertical, bool flip_horizontal)
 {
-    int hexFF = 255;
     int x, y, uvIndex, index;
     int yp, up, vp;
     int r, g, b;
     int rt, gt, bt;
 
-    double rad = (angleRotation * M_PI / 180.0);
-    double sinVal = sin(rad);
-    double cosVal = cos(rad);
-    int newImgWidth = (int)(fabs(sinVal * height) + fabs(cosVal * width));
-    int newImgHeight = (int)(fabs(sinVal * width) + fabs(cosVal * height));
-    double w2 = 0.5 * width;
-    double h2 = 0.5 * height;
-    double dw2 = 0.5 * newImgWidth;
-    double dh2 = 0.5 * newImgHeight;
-
-    uint32_t *table = malloc(sizeof(uint32_t) * (width * height));
-    uint32_t *imageRot = malloc(sizeof(uint32_t) * (newImgWidth * newImgHeight));
+    uint32_t *src = malloc(sizeof(uint32_t) * (width * height));
 
     for (x = 0; x < width; ++x)
     {
@@ -177,41 +246,73 @@ uint32_t *convert_image_rgb(uint8_t *plane0, uint8_t *plane1, uint8_t *plane2, i
             rt = round(yp + vp * 1436 / 1024 - 179);
             gt = round(yp - up * 46549 / 131072 + 44 - vp * 93604 / 131072 + 91);
             bt = round(yp + up * 1814 / 1024 - 227);
-            r = clamp(0, 255, rt);
-            g = clamp(0, 255, gt);
-            b = clamp(0, 255, bt);
-            table[x + y * width] = (hexFF << 24) | (b << 16) | (g << 8) | r;
+            r = _clamp(0, 255, rt);
+            g = _clamp(0, 255, gt);
+            b = _clamp(0, 255, bt);
+            src[x + y * width] = (HEXFF << 24) | (b << 16) | (g << 8) | r;
         }
+    }
+    if (flip_horizontal)
+    {
+        _flip_horizontal_32bit(width, height, src);
+    }
+    if (flip_vertical)
+    {
+        _flip_vertical_32bit(width, height, src);
     }
 
-    for (int i = 0; i < newImgHeight; ++i)
+    if (angleRotation == 0)
     {
-        for (int j = 0; j < newImgWidth; ++j)
-        {
-            double oriX = (w2 + (j - dw2) * cosVal + (i - dh2) * sinVal);
-            double oriY = (h2 - (j - dw2) * sinVal + (i - dh2) * cosVal);
-            if (oriX >= 0 && oriX < width && oriY >= 0 && oriY < height)
-            {
-                imageRot[i * newImgWidth + j] = table[(int)(oriX) + (int)(oriY)*newImgHeight];
-            }
-            else
-            {
-                imageRot[i * newImgWidth + j] = 0;
-            }
-        }
+        return src;
     }
-    free(table);
-    for (int i = 0; i < newImgHeight; ++i)
+    else
     {
-        int i1 = (int)(i * newImgWidth);
-        for (int j = 0; j < (int)(dw2); ++j)
-        {
-            int j2 = (newImgWidth - 1 - j);
-            uint32_t t = imageRot[i1 + j2];
-            imageRot[i1 + j2] = imageRot[i1 + j];
-            imageRot[i1 + j] = t;
-        }
+        return _rotaion_image_32bit(src, angleRotation, width, height, background_color);
     }
+}
 
-    return imageRot;
+uint32_t *convert_image_nv12_to_rgb(uint8_t *plane0, uint8_t *plane1, int bytesPerRow, int bytesPerPixel, int width, int height, double angleRotation, uint32_t background_color, bool flip_vertical, bool flip_horizontal)
+{
+    int x, y, uvIndex, index;
+    int yp, up, vp;
+    int r, g, b;
+    int rt, gt, bt;
+
+    uint32_t *src = malloc(sizeof(uint32_t) * (width * height));
+
+    for (x = 0; x < width; ++x)
+    {
+        for (y = 0; y < height; ++y)
+        {
+            uvIndex = bytesPerPixel * ((int)floor(x / 2)) + bytesPerRow * ((int)floor(y / 2));
+            index = y * width + x;
+
+            yp = plane0[index];
+            up = plane1[uvIndex];
+            vp = plane1[uvIndex + 1];
+            rt = round(yp + vp * 1436 / 1024 - 179);
+            gt = round(yp - up * 46549 / 131072 + 44 - vp * 93604 / 131072 + 91);
+            bt = round(yp + up * 1814 / 1024 - 227);
+            r = _clamp(0, 255, rt);
+            g = _clamp(0, 255, gt);
+            b = _clamp(0, 255, bt);
+            src[x + y * width] = (HEXFF << 24) | (b << 16) | (g << 8) | r;
+        }
+    }
+    if (flip_horizontal)
+    {
+        _flip_horizontal_32bit(width, height, src);
+    }
+    if (flip_vertical)
+    {
+        _flip_vertical_32bit(width, height, src);
+    }
+    if (angleRotation == 0)
+    {
+        return src;
+    }
+    else
+    {
+        return _rotaion_image_32bit(src, angleRotation, width, height, background_color);
+    }
 }
