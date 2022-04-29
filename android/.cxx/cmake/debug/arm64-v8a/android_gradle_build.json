@@ -1,0 +1,43 @@
+{
+  "stringTable": {
+    "0": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a",
+    "1": "--target=aarch64-none-linux-android21 --gcc-toolchain=/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DconvertImage_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/home/thuannek69/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a\" clean"
+  ],
+  "buildTargetsCommand": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "convertImage-Debug-arm64-v8a": {
+      "buildCommand": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a\" convertImage",
+      "buildType": "debug",
+      "toolchain": "3019646602",
+      "abi": "arm64-v8a",
+      "artifactName": "convertImage",
+      "files": [
+        {
+          "src": "/home/thuannek69/Desktop/processing_camera_image/ios/native/converter.c",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/arm64-v8a/libconvertImage.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "3019646602": {
+      "cCompilerExecutable": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/bin/clang"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

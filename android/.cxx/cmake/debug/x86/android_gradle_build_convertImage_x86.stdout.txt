@@ -1,0 +1,2 @@
+ninja: Entering directory `/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86'
+ninja: no work to do.
