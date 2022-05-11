@@ -1,3 +1,6 @@
+## 0.0.7
+
+- Fix method Gray 8 bit with return type.
 ## 0.0.6
 
 - Fix method Gray 8 bit.
