@@ -1,3 +1,3 @@
 # ninja log v5
-0	26	1651223008	CMakeFiles/convertImage.dir/home/thuannek69/Desktop/processing_camera_image/ios/native/converter.c.o	637b7a7922dd167a
-26	33	1651223008	/home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86/libconvertImage.so	2cab2e6b66a1010d
+1	77	1652244529	CMakeFiles/convertImage.dir/Users/moon/Desktop/processing_camera_image/ios/native/converter.c.o	54240f3550353e92
+77	114	1652244529	/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86/libconvertImage.so	65305065f72ffba6

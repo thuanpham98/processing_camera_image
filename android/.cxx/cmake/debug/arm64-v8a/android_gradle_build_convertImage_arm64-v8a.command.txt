@@ -1,7 +1,7 @@
-Executable : /home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+Executable : /Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
 arguments : 
 -C
-/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a
+/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/arm64-v8a
 convertImage
 jvmArgs : 
 

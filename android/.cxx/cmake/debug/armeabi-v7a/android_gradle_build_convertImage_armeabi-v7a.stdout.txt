@@ -1,2 +1,2 @@
-ninja: Entering directory `/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/armeabi-v7a'
+ninja: Entering directory `/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/armeabi-v7a'
 ninja: no work to do.

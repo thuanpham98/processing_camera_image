@@ -1,9 +1,18 @@
+## 0.0.6
+
+- Fix method Gray 8 bit.
+
+## 0.0.5
+
+- Fix native code for IOS.
+
 ## 0.0.4
 
-- Fix native code for IOS , optimize processing
+- Fix native code for IOS , optimize processing.
+
 ## 0.0.3
 
-- Fix native code, avoiding overload memory
+- Fix native code, avoiding overload memory.
 
 ## 0.0.2
 

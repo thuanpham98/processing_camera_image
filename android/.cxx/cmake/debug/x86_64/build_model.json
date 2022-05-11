@@ -5,9 +5,9 @@
     "environmentVariables": []
   },
   "cmake": {
-    "cmakeArtifactsBaseFolder": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
-    "cmakeServerLogFile": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64/cmake_server_log.txt",
-    "cmakeWrappingBaseFolder": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cxx/debug/x86_64",
+    "cmakeArtifactsBaseFolder": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
+    "cmakeServerLogFile": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64/cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cxx/debug/x86_64",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -15,13 +15,13 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
-      "cmakeToolchain": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
-      "cmakeExecutable": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/cmake",
+      "buildRoot": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
+      "cmakeToolchain": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+      "cmakeExecutable": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake",
       "variables": [
         {
           "name": "CMAKE_FIND_ROOT_PATH",
-          "value": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab/x86_64/prefab"
+          "value": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab/x86_64/prefab"
         },
         {
           "name": "CMAKE_BUILD_TYPE",
@@ -29,7 +29,7 @@
         },
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake"
+          "value": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake"
         },
         {
           "name": "ANDROID_ABI",
@@ -37,7 +37,7 @@
         },
         {
           "name": "ANDROID_NDK",
-          "value": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462"
+          "value": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462"
         },
         {
           "name": "ANDROID_PLATFORM",
@@ -49,7 +49,7 @@
         },
         {
           "name": "CMAKE_ANDROID_NDK",
-          "value": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462"
+          "value": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462"
         },
         {
           "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
@@ -57,11 +57,11 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "/home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86_64"
+          "value": "/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86_64"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
-          "value": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja"
+          "value": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja"
         },
         {
           "name": "CMAKE_SYSTEM_NAME",
@@ -74,14 +74,14 @@
       ]
     }
   },
-  "cxxBuildFolder": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
+  "cxxBuildFolder": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
   "info": {
     "abi": "X86_64",
     "bitness": 64,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
+  "originalCxxBuildFolder": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86_64",
   "variant": {
     "buildSystemArgumentList": [],
     "buildTargetSet": [],
@@ -93,24 +93,24 @@
     "module": {
       "buildSystem": "CMAKE",
       "cmake": {
-        "cmakeExe": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/cmake",
+        "cmakeExe": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/cmake",
         "minimumCmakeVersion": "3.10.2",
-        "ninjaExe": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja"
+        "ninjaExe": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja"
       },
-      "cmakeToolchainFile": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
-      "cxxFolder": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx",
+      "cmakeToolchainFile": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+      "cxxFolder": "/Users/moon/Desktop/processing_camera_image/android/.cxx",
       "gradleModulePathName": ":processing_camera_image",
-      "intermediatesFolder": "/home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates",
-      "makeFile": "/home/thuannek69/Desktop/processing_camera_image/android/CMakeLists.txt",
-      "moduleBuildFile": "/home/thuannek69/Desktop/processing_camera_image/android/build.gradle",
-      "moduleRootFolder": "/home/thuannek69/Desktop/processing_camera_image/android",
+      "intermediatesFolder": "/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates",
+      "makeFile": "/Users/moon/Desktop/processing_camera_image/android/CMakeLists.txt",
+      "moduleBuildFile": "/Users/moon/Desktop/processing_camera_image/android/build.gradle",
+      "moduleRootFolder": "/Users/moon/Desktop/processing_camera_image/android",
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
         "X86",
         "X86_64"
       ],
-      "ndkFolder": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462",
+      "ndkFolder": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462",
       "ndkMetaAbiList": [
         {
           "abi": "ARMEABI_V7A",
@@ -167,29 +167,29 @@
       "ndkDefaultStl": "LIBCXX_STATIC",
       "ndkVersion": "21.1.6352462",
       "project": {
-        "compilerSettingsCacheFolder": "/home/thuannek69/Desktop/processing_camera_image/example/android/.cxx",
-        "cxxFolder": "/home/thuannek69/Desktop/processing_camera_image/example/android/.cxx",
+        "compilerSettingsCacheFolder": "/Users/moon/Desktop/processing_camera_image/example/android/.cxx",
+        "cxxFolder": "/Users/moon/Desktop/processing_camera_image/example/android/.cxx",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "/home/thuannek69/Desktop/processing_camera_image/example/android",
-        "sdkFolder": "/home/thuannek69/Android/Sdk",
+        "rootBuildGradleFolder": "/Users/moon/Desktop/processing_camera_image/example/android",
+        "sdkFolder": "/Users/moon/Library/Android/sdk",
         "isPrefabEnabled": false
       },
       "splitsAbiFilterSet": [],
       "stlSharedObjectMap": {
         "LIBCXX_SHARED": {
-          "ARMEABI_V7A": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/libc++_shared.so",
-          "ARM64_V8A": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so",
-          "X86": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/libc++_shared.so",
-          "X86_64": "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so"
+          "ARMEABI_V7A": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/libc++_shared.so",
+          "ARM64_V8A": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so",
+          "X86": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/i686-linux-android/libc++_shared.so",
+          "X86_64": "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/libc++_shared.so"
         },
         "LIBCXX_STATIC": {},
         "NONE": {},
         "SYSTEM": {}
       }
     },
-    "objFolder": "/home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj",
+    "objFolder": "/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj",
     "variantName": "debug",
     "validAbiList": [
       "ARMEABI_V7A",
@@ -197,8 +197,8 @@
       "X86",
       "X86_64"
     ],
-    "prefabDirectory": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab",
+    "prefabDirectory": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab",
     "prefabPackageDirectoryList": []
   },
-  "prefabFolder": "/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab/x86_64"
+  "prefabFolder": "/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/prefab/x86_64"
 }

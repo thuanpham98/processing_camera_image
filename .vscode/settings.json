@@ -1,7 +1,9 @@
 {
   "files.associations": {
     "chrono": "c",
-    "complex": "c"
+    "complex": "c",
+    "algorithm": "c",
+    "__locale": "c"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }

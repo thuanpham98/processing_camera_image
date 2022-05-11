@@ -1,19 +1,19 @@
 {
   "buildFiles": [
-    "/home/thuannek69/Desktop/processing_camera_image/android/CMakeLists.txt",
-    "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
-    "/home/thuannek69/Android/Sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+    "/Users/moon/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/moon/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
   ],
   "cleanCommands": [
-    "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86\" clean"
+    "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86\" clean"
   ],
-  "buildTargetsCommand": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
     "convertImage-Debug-x86": {
       "artifactName": "convertImage",
-      "buildCommand": "/home/thuannek69/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/thuannek69/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86\" convertImage",
+      "buildCommand": "/Users/moon/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/moon/Desktop/processing_camera_image/android/.cxx/cmake/debug/x86\" convertImage",
       "abi": "x86",
-      "output": "/home/thuannek69/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86/libconvertImage.so",
+      "output": "/Users/moon/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/debug/obj/x86/libconvertImage.so",
       "runtimeFiles": []
     }
   }

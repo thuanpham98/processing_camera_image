@@ -185,7 +185,7 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     bool isFlipHoriozntal = false,
     bool isFlipVectical = false,
   }) {
-    if (width == null || height == null || plane0?.isEmpty == null) {
+    if (width == null || height == null || plane0 == null || plane0.isEmpty) {
       return null;
     }
 
@@ -198,9 +198,9 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int newImgWidth = (sinVal * height + cosVal * width).toInt();
     int newImgHeight = (sinVal * width + cosVal * height).toInt();
 
-    Pointer<Uint8> p = ffi.malloc.allocate(plane0?.length ?? 0);
-    Uint8List pointerList = p.asTypedList(plane0?.length ?? 0);
-    pointerList.setRange(0, plane0?.length ?? 0, plane0 ?? Uint8List(0));
+    Pointer<Uint8> p = ffi.malloc.allocate(plane0.length);
+    Uint8List pointerList = p.asTypedList(plane0.length);
+    pointerList.setRange(0, plane0.length, plane0);
 
     Pointer<Uint8> imgP = _convertImageYuv420pToGray8Bit(
       p,
@@ -213,11 +213,16 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     );
 
     Uint8List imgData = imgP.asTypedList(newImgHeight * newImgWidth);
+    imglib.Image img =
+        imglib.Image.fromBytes(newImgWidth, newImgHeight, imgData);
+
+    // retData.addAll(imgData);
 
     ffi.malloc.free(p);
     ffi.malloc.free(imgP);
 
-    return imgData;
+    // print(newImgHeight * newImgWidth);
+    return img.getBytes();
   }
 
   /// [processCameraImageToRGBIOS]. for IOS with YUV420.
