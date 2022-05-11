@@ -83,12 +83,10 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int newImgWidth = (sinVal * height + cosVal * bytesPerRowPlane0).toInt();
     int newImgHeight = (sinVal * bytesPerRowPlane0 + cosVal * height).toInt();
 
-    // Allocate memory for the 3 planes of the image
     Pointer<Uint8> p = ffi.malloc.allocate(plane0.length);
     Pointer<Uint8> p1 = ffi.malloc.allocate(plane1.length);
     Pointer<Uint8> p2 = ffi.malloc.allocate(plane2.length);
 
-    // Assign the planes data to the pointers of the image
     Uint8List pointerList = p.asTypedList(plane0.length);
     Uint8List pointerList1 = p1.asTypedList(plane1.length);
     Uint8List pointerList2 = p2.asTypedList(plane2.length);
@@ -96,7 +94,6 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     pointerList1.setRange(0, plane1.length, plane1);
     pointerList2.setRange(0, plane2.length, plane2);
 
-    // Call the convertImage function and convert the YUV to RGB
     Pointer<Uint32> imgP = _convertImageYuv420pToRGB(
       p,
       p1,
@@ -111,14 +108,10 @@ class IProcessingCameraImage implements ProcessingCameraImage {
       isFlipHoriozntal,
     );
 
-    // Get the pointer of the data returned from the function to a List
     List<int> imgData = imgP.asTypedList(((newImgWidth) * (newImgHeight)));
-    // Generate image from the converted data
     imglib.Image img =
         imglib.Image.fromBytes(newImgWidth, newImgHeight, imgData);
 
-    // Free the memory space allocated
-    // from the planes and the converted data
     ffi.malloc.free(p);
     ffi.malloc.free(p1);
     ffi.malloc.free(p2);
@@ -176,7 +169,7 @@ class IProcessingCameraImage implements ProcessingCameraImage {
 
   /// [processCameraImageToGray8Bit].
   @override
-  Uint8List? processCameraImageToGray8Bit({
+  Image8bit? processCameraImageToGray8Bit({
     int? width,
     int? height,
     Uint8List? plane0,
@@ -216,13 +209,14 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     imglib.Image img =
         imglib.Image.fromBytes(newImgWidth, newImgHeight, imgData);
 
-    // retData.addAll(imgData);
-
     ffi.malloc.free(p);
     ffi.malloc.free(imgP);
 
-    // print(newImgHeight * newImgWidth);
-    return img.getBytes();
+    return Image8bit(
+      data: img.getBytes(),
+      heigh: newImgHeight,
+      width: newImgWidth,
+    );
   }
 
   /// [processCameraImageToRGBIOS]. for IOS with YUV420.
@@ -259,17 +253,14 @@ class IProcessingCameraImage implements ProcessingCameraImage {
     int newImgWidth = (sinVal * height + cosVal * bytesPerRowPlane0).toInt();
     int newImgHeight = (sinVal * bytesPerRowPlane0 + cosVal * height).toInt();
 
-    // Allocate memory for the 3 planes of the image
     Pointer<Uint8> p = ffi.malloc.allocate(plane0.length);
     Pointer<Uint8> p1 = ffi.malloc.allocate(plane1.length);
 
-    // Assign the planes data to the pointers of the image
     Uint8List pointerList = p.asTypedList(plane0.length);
     Uint8List pointerList1 = p1.asTypedList(plane1.length);
     pointerList.setRange(0, plane0.length, plane0);
     pointerList1.setRange(0, plane1.length, plane1);
 
-    // Call the convertImage function and convert the YUV to RGB
     Pointer<Uint32> imgP = _convertImageNV12ToRGB(
       p,
       p1,
@@ -283,15 +274,11 @@ class IProcessingCameraImage implements ProcessingCameraImage {
       isFlipHoriozntal,
     );
 
-    // Get the pointer of the data returned from the function to a List
     final imgData = imgP.asTypedList(((newImgWidth) * (newImgHeight)));
 
-    // // Generate image from the converted data
     imglib.Image img =
         imglib.Image.fromBytes(newImgWidth, newImgHeight, imgData);
 
-    // Free the memory space allocated
-    // from the planes and the converted data
     ffi.malloc.free(p);
     ffi.malloc.free(p1);
     ffi.malloc.free(imgP);

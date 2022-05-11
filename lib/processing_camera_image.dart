@@ -60,7 +60,7 @@ abstract class ProcessingCameraImage {
   });
 
   /// [processCameraImageToGray8Bit]. for Android with YUV420.
-  Uint8List? processCameraImageToGray8Bit({
+  Image8bit? processCameraImageToGray8Bit({
     int? width,
     int? height,
     Uint8List? plane0,
@@ -69,4 +69,11 @@ abstract class ProcessingCameraImage {
     bool isFlipHoriozntal = false,
     bool isFlipVectical = false,
   });
+}
+
+class Image8bit {
+  final int width;
+  final int heigh;
+  final Uint8List data;
+  Image8bit({required this.data, required this.heigh, required this.width});
 }
