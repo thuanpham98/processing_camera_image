@@ -72,16 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   imglib.Image? processImage(CameraImage _savedImage) {
-    // return _processingCameraImage.processCameraImageToRGBIOS(
-    //   bytesPerPixelPlan1: 2,
-    //   bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
-    //   bytesPerRowPlane1: _savedImage.planes[0].bytesPerRow,
-    //   height: _savedImage.height,
-    //   plane0: _savedImage.planes[0].bytes,
-    //   plane1: _savedImage.planes[1].bytes,
-    //   rotationAngle: 0,
-    //   width: _savedImage.width,
-    // );
+//     return _processingCameraImage.processCameraImageToRGB(
+//       bytesPerPixelPlan1: 2,
+//       bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
+//       bytesPerRowPlane1: _savedImage.planes[1].bytesPerRow,
+//       height: _savedImage.height,
+//       plane0: _savedImage.planes[0].bytes,
+//       plane1: _savedImage.planes[1].bytes,
+//       rotationAngle: 15,
+//       width: _savedImage.width,
+//       plane2: _savedImage.planes[2].bytes,
+//       // isFlipHoriozntal: true,
+//     );
     return _processingCameraImage.processCameraImageToGrayIOS(
       height: _savedImage.height,
       width: _savedImage.width,
