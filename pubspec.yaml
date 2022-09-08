@@ -1,18 +1,18 @@
 name: processing_camera_image
 description: A Plutter plugin with C native for processing camera image from package camera
-version: 0.0.7
+version: 0.0.8
 repository: https://github.com/thuanpham98/processing_camera_image
 homepage: https://github.com/thuanpham98/processing_camera_image
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
-  flutter: ">=2.5.0"
+  sdk: ">=2.18.0 <3.0.0"
+  flutter: ">=3.3.1"
 
 dependencies:
   flutter:
     sdk: flutter
-  ffi: ^1.1.2
-  image: ^3.1.3
+  ffi: ^2.0.1
+  image: ^3.2.0
 
 dev_dependencies:
   flutter_test:

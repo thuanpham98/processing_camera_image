@@ -1,3 +1,7 @@
+## 0.0.8
+
+- update flutter support to 3.3.1
+
 ## 0.0.7
 
 - Fix method Gray 8 bit with return type.
