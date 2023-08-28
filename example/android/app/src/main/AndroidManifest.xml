@@ -1,7 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="vn.thuanpm.processing_camera_image_example">
-   <application
-        android:label="processing_camera_image_example"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application
+        android:label="example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

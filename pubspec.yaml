@@ -1,23 +1,23 @@
 name: processing_camera_image
 description: A Plutter plugin with C native for processing camera image from package camera
-version: 0.0.8
+version: 0.0.10
 repository: https://github.com/thuanpham98/processing_camera_image
 homepage: https://github.com/thuanpham98/processing_camera_image
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
-  flutter: ">=3.3.1"
+  sdk: ">=2.18.0"
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  ffi: ^2.0.1
-  image: ^3.2.0
+  ffi: ^2.1.0
+  image: ^4.0.17
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

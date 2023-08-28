@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:async' show Future;
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';

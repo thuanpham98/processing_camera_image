@@ -1,0 +1,68 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 21 min SDK version: x86",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "Trying to locate CMake in local SDK repository.",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- CMake found in SDK at \u0027/Users/thuanpham/Library/Android/sdk/cmake/3.22.1\u0027 had version \u00273.22.1\u0027",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "rebuilding JSON /Users/thuanpham/Desktop/processing_camera_image/android/.cxx/cmake/release/x86/android_gradle_build.json due to:",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- expected json /Users/thuanpham/Desktop/processing_camera_image/android/.cxx/cmake/release/x86/android_gradle_build.json file is not present, will remove stale json folder",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- missing previous command file /Users/thuanpham/Desktop/processing_camera_image/android/.cxx/cmake/release/x86/build_command.txt, will remove stale json folder",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "- command changed from previous, will remove stale json folder",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "removing stale contents from \u0027/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/cmake/release/x86\u0027",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "created folder \u0027/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/cmake/release/x86\u0027",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "executing cmake Executable : /Users/thuanpham/Library/Android/sdk/cmake/3.22.1/bin/cmake\narguments : \n-H/Users/thuanpham/Desktop/processing_camera_image/android\n-DCMAKE_FIND_ROOT_PATH\u003d/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/cmake/release/prefab/x86/prefab\n-DCMAKE_BUILD_TYPE\u003dRelease\n-DCMAKE_TOOLCHAIN_FILE\u003d/Users/thuanpham/Library/Android/sdk/ndk/25.2.9519653/build/cmake/android.toolchain.cmake\n-DANDROID_ABI\u003dx86\n-DANDROID_NDK\u003d/Users/thuanpham/Library/Android/sdk/ndk/25.2.9519653\n-DANDROID_PLATFORM\u003dandroid-21\n-DCMAKE_ANDROID_ARCH_ABI\u003dx86\n-DCMAKE_ANDROID_NDK\u003d/Users/thuanpham/Library/Android/sdk/ndk/25.2.9519653\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003d/Users/thuanpham/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cmake/release/obj/x86\n-DCMAKE_MAKE_PROGRAM\u003d/Users/thuanpham/Library/Android/sdk/cmake/3.22.1/bin/ninja\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_SYSTEM_VERSION\u003d21\n-B/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/cmake/release/x86\n-GNinja\njvmArgs : \n\n",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  },
+  {
+    "level": "INFO",
+    "message": "null\n",
+    "file": "/Users/thuanpham/Desktop/processing_camera_image/android/CMakeLists.txt",
+    "tag": "release|x86"
+  }
+]

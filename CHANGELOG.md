@@ -1,3 +1,7 @@
+## 0.0.10
+
+- update flutter and packages dependency.
+
 ## 0.0.8
 
 - update flutter support to 3.3.1

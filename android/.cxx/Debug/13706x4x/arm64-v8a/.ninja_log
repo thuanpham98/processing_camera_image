@@ -1,0 +1,3 @@
+# ninja log v5
+0	90	1693207988633019106	CMakeFiles/convertImage.dir/Users/thuanpham/Desktop/processing_camera_image/ios/native/converter.c.o	ae5fac15bcff9749
+91	170	1693207988711197888	/Users/thuanpham/Desktop/processing_camera_image/example/build/processing_camera_image/intermediates/cxx/Debug/13706x4x/obj/arm64-v8a/libconvertImage.so	27d6287af4fa4d73

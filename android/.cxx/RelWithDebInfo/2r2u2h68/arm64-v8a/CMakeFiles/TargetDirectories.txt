@@ -1,0 +1,3 @@
+/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/RelWithDebInfo/2r2u2h68/arm64-v8a/CMakeFiles/convertImage.dir
+/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/RelWithDebInfo/2r2u2h68/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/RelWithDebInfo/2r2u2h68/arm64-v8a/CMakeFiles/rebuild_cache.dir
