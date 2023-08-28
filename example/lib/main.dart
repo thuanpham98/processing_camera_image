@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  imglib.Image? processImage(CameraImage _savedImage) {
+  imglib.Image? processImage(CameraImage savedImage) {
 //     return _processingCameraImage.processCameraImageToRGB(
 //       bytesPerPixelPlan1: 2,
 //       bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
@@ -82,12 +82,12 @@ class _MyHomePageState extends State<MyHomePage> {
 //       rotationAngle: 15,
 //       width: _savedImage.width,
 //       plane2: _savedImage.planes[2].bytes,
-//       // isFlipHoriozntal: true,
+//       isFlipHoriozntal: true,
 //     );
     return _processingCameraImage.processCameraImageToGrayIOS(
-      height: _savedImage.height,
-      width: _savedImage.width,
-      plane0: _savedImage.planes[0].bytes,
+      height: savedImage.height,
+      width: savedImage.width,
+      plane0: savedImage.planes[0].bytes,
       rotationAngle: 15,
       backGroundColor: Colors.red.value,
       isFlipVectical: true,

@@ -5,7 +5,7 @@ repository: https://github.com/thuanpham98/processing_camera_image
 homepage: https://github.com/thuanpham98/processing_camera_image
 
 environment:
-  sdk: ">=2.18.0"
+  sdk: ">=2.18.0 <4.0.0"
   flutter: ">=3.3.0"
 
 dependencies:
