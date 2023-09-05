@@ -110,10 +110,10 @@ class IProcessingCameraImage implements ProcessingCameraImage {
 
     List<int> imgData = imgP.asTypedList(((newImgWidth) * (newImgHeight)));
     imglib.Image img = imglib.Image.fromBytes(
-      bytes: Uint32List.fromList(imgData).buffer,
-      width: newImgWidth,
-      height: newImgHeight,
-    );
+        bytes: Uint32List.fromList(imgData).buffer,
+        width: newImgWidth,
+        height: newImgHeight,
+        order: imglib.ChannelOrder.rgba);
 
     ffi.malloc.free(p);
     ffi.malloc.free(p1);
@@ -162,10 +162,10 @@ class IProcessingCameraImage implements ProcessingCameraImage {
 
     List<int> imgData = imgP.asTypedList(newImgWidth * newImgHeight);
     imglib.Image img = imglib.Image.fromBytes(
-      bytes: Uint32List.fromList(imgData).buffer,
-      width: newImgWidth,
-      height: newImgHeight,
-    );
+        bytes: Uint32List.fromList(imgData).buffer,
+        width: newImgWidth,
+        height: newImgHeight,
+        order: imglib.ChannelOrder.rgba);
 
     ffi.malloc.free(p);
     ffi.malloc.free(imgP);
@@ -213,10 +213,11 @@ class IProcessingCameraImage implements ProcessingCameraImage {
 
     Uint8List imgData = imgP.asTypedList(newImgHeight * newImgWidth);
     imglib.Image img = imglib.Image.fromBytes(
-      bytes: imgData.buffer,
-      width: newImgWidth,
-      height: newImgHeight,
-    );
+        bytes: imgData.buffer,
+        width: newImgWidth,
+        height: newImgHeight,
+        numChannels: 1,
+        order: imglib.ChannelOrder.red);
 
     ffi.malloc.free(p);
     ffi.malloc.free(imgP);
@@ -285,10 +286,10 @@ class IProcessingCameraImage implements ProcessingCameraImage {
 
     final imgData = imgP.asTypedList(((newImgWidth) * (newImgHeight)));
     imglib.Image img = imglib.Image.fromBytes(
-      bytes: imgData.buffer,
-      width: newImgWidth,
-      height: newImgHeight,
-    );
+        bytes: imgData.buffer,
+        width: newImgWidth,
+        height: newImgHeight,
+        order: imglib.ChannelOrder.rgba);
 
     ffi.malloc.free(p);
     ffi.malloc.free(p1);

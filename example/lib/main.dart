@@ -2,10 +2,13 @@ import 'dart:async' show Future;
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as imglib;
 import 'package:processing_camera_image/processing_camera_image.dart';
 import 'package:rxdart/rxdart.dart';
+
+final ProcessingCameraImage _processingCameraImage = ProcessingCameraImage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,12 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
   late final CameraController _cameraController;
   late Future<void> _instanceInit;
   final pipe = BehaviorSubject<CameraImage?>.seeded(null);
-  final ProcessingCameraImage _processingCameraImage = ProcessingCameraImage();
   imglib.Image? currentImage;
+  final stopwatch = Stopwatch();
 
   void _processinngImage(CameraImage? value) async {
     if (value != null) {
-      currentImage = await Future.microtask(() => processImage(value));
+      stopwatch.start();
+      currentImage = await compute(processImage, value);
+      stopwatch.stop();
+      print(stopwatch.elapsedMilliseconds); // Likely > 0.
+      stopwatch.reset();
     }
   }
 
@@ -63,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
-    _cameraController = CameraController(cameras[0], ResolutionPreset.medium,
+    _cameraController = CameraController(cameras[0], ResolutionPreset.low,
         imageFormatGroup: ImageFormatGroup.yuv420);
     await _cameraController.initialize();
     await _cameraController.startImageStream((image) {
@@ -71,27 +78,32 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  imglib.Image? processImage(CameraImage savedImage) {
-//     return _processingCameraImage.processCameraImageToRGB(
-//       bytesPerPixelPlan1: 2,
-//       bytesPerRowPlane0: _savedImage.planes[0].bytesPerRow,
-//       bytesPerRowPlane1: _savedImage.planes[1].bytesPerRow,
-//       height: _savedImage.height,
-//       plane0: _savedImage.planes[0].bytes,
-//       plane1: _savedImage.planes[1].bytes,
-//       rotationAngle: 15,
-//       width: _savedImage.width,
-//       plane2: _savedImage.planes[2].bytes,
-//       isFlipHoriozntal: true,
-//     );
-    return _processingCameraImage.processCameraImageToGrayIOS(
+  static imglib.Image? processImage(CameraImage savedImage) {
+    return _processingCameraImage.processCameraImageToRGB(
+      // height: savedImage.height,
+      // plane0: savedImage.planes[0].bytes,
+      // width: savedImage.width,
+      bytesPerPixelPlan1: savedImage.planes[1].bytesPerPixel,
+      bytesPerRowPlane0: savedImage.planes[0].bytesPerRow,
+      bytesPerRowPlane1: savedImage.planes[1].bytesPerRow,
       height: savedImage.height,
-      width: savedImage.width,
       plane0: savedImage.planes[0].bytes,
+      plane1: savedImage.planes[1].bytes,
+      plane2: savedImage.planes[2].bytes,
       rotationAngle: 15,
-      backGroundColor: Colors.red.value,
+      width: savedImage.width,
+      isFlipHoriozntal: true,
       isFlipVectical: true,
     );
+
+    // return _processingCameraImage.processCameraImageToGrayIOS(
+    //   height: savedImage.height,
+    //   width: savedImage.width,
+    //   plane0: savedImage.planes[0].bytes,
+    //   rotationAngle: 15,
+    //   backGroundColor: Colors.red.value,
+    //   isFlipVectical: true,
+    // );
   }
 
   @override
@@ -110,8 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
               MaterialPageRoute(
                   builder: (context) => Scaffold(
                         body: Center(
-                          child: Image.memory(Uint8List.fromList(
-                              imglib.encodeJpg(currentImage!))),
+                          child: currentImage != null
+                              ? Image.memory(Uint8List.fromList(
+                                  imglib.encodePng(currentImage!)))
+                              : Container(),
                         ),
                       )));
         },

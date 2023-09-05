@@ -1,3 +1,0 @@
-/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/Debug/13706x4x/armeabi-v7a/CMakeFiles/convertImage.dir
-/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/Debug/13706x4x/armeabi-v7a/CMakeFiles/edit_cache.dir
-/Users/thuanpham/Desktop/processing_camera_image/android/.cxx/Debug/13706x4x/armeabi-v7a/CMakeFiles/rebuild_cache.dir
