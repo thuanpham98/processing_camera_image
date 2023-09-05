@@ -1,10 +1,14 @@
+## 0.0.11
+
+- Fix error with new version of package image.
+
 ## 0.0.10
 
-- update flutter and packages dependency.
+- Update flutter and packages dependency.
 
 ## 0.0.8
 
-- update flutter support to 3.3.1
+- Update flutter support to 3.3.1
 
 ## 0.0.7
 
