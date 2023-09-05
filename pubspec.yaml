@@ -1,6 +1,6 @@
 name: processing_camera_image
 description: A Plutter plugin with C native for processing camera image from package camera
-version: 0.0.11
+version: 0.0.12
 repository: https://github.com/thuanpham98/processing_camera_image
 homepage: https://github.com/thuanpham98/processing_camera_image
 

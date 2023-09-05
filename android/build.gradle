@@ -22,7 +22,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -31,6 +31,8 @@ android {
 
     defaultConfig {
         minSdkVersion 21
+        targetSdkVersion 30
+        ndkVersion "25.2.9519653"
     }
 
     externalNativeBuild{

@@ -1,3 +1,7 @@
+## 0.0.12
+
+- Fix config ndk to version 25.2.9519653.
+
 ## 0.0.11
 
 - Fix error with new version of package image.

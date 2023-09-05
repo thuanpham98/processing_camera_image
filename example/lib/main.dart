@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
-    _cameraController = CameraController(cameras[0], ResolutionPreset.low,
+    _cameraController = CameraController(cameras[0], ResolutionPreset.medium,
         imageFormatGroup: ImageFormatGroup.yuv420);
     await _cameraController.initialize();
     await _cameraController.startImageStream((image) {
@@ -90,10 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
       plane0: savedImage.planes[0].bytes,
       plane1: savedImage.planes[1].bytes,
       plane2: savedImage.planes[2].bytes,
-      rotationAngle: 15,
+      // rotationAngle: 15,
       width: savedImage.width,
-      isFlipHoriozntal: true,
-      isFlipVectical: true,
+      // isFlipHoriozntal: true,
+      // isFlipVectical: true,
     );
 
     // return _processingCameraImage.processCameraImageToGrayIOS(
@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         body: Center(
                           child: currentImage != null
                               ? Image.memory(Uint8List.fromList(
-                                  imglib.encodePng(currentImage!)))
+                                  imglib.encodeJpg(currentImage!)))
                               : Container(),
                         ),
                       )));
