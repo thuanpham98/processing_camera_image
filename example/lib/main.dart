@@ -44,14 +44,17 @@ class _MyHomePageState extends State<MyHomePage> {
   final pipe = BehaviorSubject<CameraImage?>.seeded(null);
   imglib.Image? currentImage;
   final stopwatch = Stopwatch();
+  bool checked = false;
 
   void _processinngImage(CameraImage? value) async {
-    if (value != null) {
+    if (value != null && !checked) {
+      checked = true;
       stopwatch.start();
       currentImage = await compute(processImage, value);
       stopwatch.stop();
       print(stopwatch.elapsedMilliseconds); // Likely > 0.
       stopwatch.reset();
+      checked = false;
     }
   }
 
@@ -70,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
-    _cameraController = CameraController(cameras[0], ResolutionPreset.medium,
+    _cameraController = CameraController(cameras[0], ResolutionPreset.veryHigh,
         imageFormatGroup: ImageFormatGroup.yuv420);
     await _cameraController.initialize();
     await _cameraController.startImageStream((image) {
