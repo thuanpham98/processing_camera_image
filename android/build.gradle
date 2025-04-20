@@ -22,6 +22,8 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
+    namespace "vn.thuanpm.processing_camera_image"
+
     compileSdkVersion 33
 
     compileOptions {
